@@ -1,25 +1,362 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+            rel="stylesheet">
+    </head>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        /* Background Image Styling */
+        body {
+            background-image: url('{{ asset('images/CV/back.png') }}');
+            background-size: cover;
+            background-position: center 20%;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Background Overlay with Gradient */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(5, 44, 19, 0.6), rgba(0, 0, 0, 0.4));
+            z-index: -1;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+       
+
+        .left-section img:hover {
+            transform: rotate(-12deg) scale(1.05);
+        }
+
+        /* Right Section (Form) */
+        .register-container {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(5, 44, 19, 0));
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 450px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInRight 1s ease-out;
+        }
+
+        /* White Inner Border */
+        .register-container::before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 13px;
+            pointer-events: none;
+        }
+
+        /* Title Styling */
+        .register-title {
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Input Styling */
+        .transparent-input {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.85rem;
+            color: white;
+            font-size: 1rem;
+            border-radius: 8px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .transparent-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 300;
+        }
+
+        .transparent-input:focus {
+            border-color: #26A155;
+            box-shadow: 0 0 10px rgba(38, 161, 85, 0.3);
+            outline: none;
+        }
+
+        /* Input Label */
+        .input-type-label {
+            color: #0CFE0C;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        /* Button Styling */
+        .primary-button {
+            background: linear-gradient(90deg, #0E3B1F, #26A155);
+            color: white;
+            padding: 0.85rem;
+            width: 100%;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(38, 161, 85, 0.3);
+        }
+
+        .primary-button:hover {
+            background: linear-gradient(90deg, #26A155, #0E3B1F);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(38, 161, 85, 0.5);
+        }
+
+        /* Login Link */
+        .login-link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .login-link:hover {
+            color: #0CFE0C;
+        }
+
+        .login-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #0CFE0C;
+            bottom: -2px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .login-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            margin: 1rem 0;
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #fff;
+        }
+
+        .or-divider::before {
+            margin-right: .5em;
+        }
+
+        .or-divider::after {
+            margin-left: .5em;
+        }
+
+
+        /* Social Login */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-button:hover {
+            color: #0CFE0C;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(12, 254, 12, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotate(-12deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(-12deg) translateY(-10px);
+            }
+
+            100% {
+                transform: rotate(-12deg) translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .left-section {
+                margin-bottom: 2rem;
+            }
+
+            .left-section h1 {
+                font-size: 2rem;
+            }
+
+            .left-section p {
+                font-size: 1rem;
+            }
+
+            .left-section img {
+                width: 200px;
+            }
+
+            .register-container {
+                max-width: 100%;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .left-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .left-section p {
+                font-size: 0.9rem;
+            }
+
+            .register-title {
+                font-size: 1.3rem;
+            }
+
+            .transparent-input {
+                font-size: 0.9rem;
+                padding: 0.65rem;
+            }
+
+            .primary-button {
+                padding: 0.65rem;
+            }
+        }
+
+        .reset-button{
+            color:white;
+        }
+    </style>
+
+    <div class="main-container">
+
+
+        <!-- Right Section: Register Form -->
+        <div class="register-container">
+            <div class="register-title">Forgat Password</div>
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+                <div class="login-link">
+                    {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                </div>
+                <br>
+                <div class="flex items-center justify-end mt-4 reset-button">
+                    <button type="submit" class="px-4 py-2 primary-button">
+                        Email Password Reset Link
+                    </button>
+                </div>
+                
+                <div class="or-divider">or</div>
+
+                <div class="social-login">
+                    <a href="#" class="social-button"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social-button"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-button"><i class="fab fa-instagram"></i></a>
+
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </x-guest-layout>
