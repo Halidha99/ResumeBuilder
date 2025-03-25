@@ -14,9 +14,14 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #1a2e35;
             color: #fff;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -26,6 +31,10 @@
             align-items: center;
             padding: 10px 30px;
             background-color: #042C16;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideInDown 0.8s ease-out;
         }
 
         .logo {
@@ -43,7 +52,6 @@
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
-            vertical-align: middle;
             margin-right: 15px;
             border: 2px solid #2ecc71;
             box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
@@ -51,7 +59,7 @@
         }
 
         .logo img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(360deg);
         }
 
         nav ul {
@@ -108,14 +116,14 @@
             color: #fff;
             font-weight: bold;
             box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         nav ul li a.login-btn:hover,
         nav ul li a.signup-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
             box-shadow: 0 5px 12px rgba(46, 204, 113, 0.5);
-            background-color: #27ae60;
+            animation: pulse 0.5s infinite;
         }
 
         /* Hero Section */
@@ -125,10 +133,13 @@
             align-items: center;
             padding: 50px;
             background-color: #1A5C2F;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .hero-content {
             max-width: 50%;
+            opacity: 0;
+            animation: slideInLeft 1s ease-out 0.5s forwards;
         }
 
         .hero-content h1 {
@@ -153,28 +164,30 @@
         .cta-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 12px rgba(46, 204, 113, 0.5);
+            animation: bounce 0.5s ease;
         }
 
         .hero-image {
-            position: relative;
             max-width: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 20px;
+            opacity: 0;
+            animation: slideInRight 1s ease-out 0.5s forwards;
         }
 
         .hero-image img {
-            max-width: 50%;
+            max-width: 45%;
             height: 50vh;
             border-radius: 15px;
             border: 3px solid #2ecc71;
             box-shadow: 0 8px 16px rgba(46, 204, 113, 0.4);
-            transform: rotate(-3deg);
             transition: transform 0.3s ease;
         }
 
         .hero-image img:hover {
-            transform: scale(1.05) rotate(0deg);
+            transform: scale(1.05) rotate(5deg);
         }
 
         /* Templates Section */
@@ -184,17 +197,7 @@
             background: linear-gradient(135deg, #134123, #27A653, #29312C);
             position: relative;
             overflow: hidden;
-        }
-
-        .templates::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: 0;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .templates h2 {
@@ -202,9 +205,8 @@
             margin-bottom: 40px;
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 1s ease-in-out;
+            opacity: 0;
+            animation: fadeInDown 1s ease-in-out 0.5s forwards;
         }
 
         .carousel {
@@ -214,7 +216,6 @@
             justify-content: center;
             gap: 30px;
             padding: 20px 0;
-            z-index: 1;
         }
 
         .carousel-arrow {
@@ -229,14 +230,12 @@
             justify-content: center;
             border-radius: 50%;
             border: 2px solid #2ecc71;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .carousel-arrow:hover {
-            transform: scale(1.15);
+            transform: scale(1.15) rotate(360deg);
             background: rgba(46, 204, 113, 0.4);
-            box-shadow: 0 6px 14px rgba(46, 204, 113, 0.4);
         }
 
         .template-cards {
@@ -244,27 +243,26 @@
             justify-content: center;
             gap: 30px;
             overflow: hidden;
+            transition: transform 0.5s ease;
         }
 
         .template-card {
             background: rgba(42, 62, 69, 0.3);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 25px;
             border-radius: 20px;
             width: 220px;
             text-align: center;
             border: 2px solid rgba(46, 204, 113, 0.3);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-            animation: fadeInUp 0.8s ease-in-out;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-in-out forwards;
         }
 
-        @supports not (backdrop-filter: blur(12px)) {
-            .template-card {
-                background: rgba(42, 62, 69, 0.6);
-            }
-        }
+        .template-card:nth-child(1) { animation-delay: 0.2s; }
+        .template-card:nth-child(2) { animation-delay: 0.4s; }
+        .template-card:nth-child(3) { animation-delay: 0.6s; }
+        .template-card:nth-child(4) { animation-delay: 0.8s; }
 
         .template-card:hover {
             transform: translateY(-10px) scale(1.05);
@@ -278,12 +276,11 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
 
         .template-card img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(3deg);
         }
 
         .template-card p {
@@ -302,14 +299,12 @@
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .template-card button:hover {
             transform: scale(1.1);
-            box-shadow: 0 5px 12px rgba(46, 204, 113, 0.5);
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            animation: pulse 0.5s infinite;
         }
 
         .carousel-controls {
@@ -317,10 +312,6 @@
             justify-content: center;
             gap: 12px;
             margin-top: 25px;
-            padding: 10px 20px;
-            background: rgba(26, 46, 53, 0.3);
-            border-radius: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .dot {
@@ -329,19 +320,17 @@
             background-color: #ccc;
             border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .dot.active {
             background-color: #2ecc71;
             transform: scale(1.4);
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
         }
 
         .dot:hover {
             transform: scale(1.4);
             background-color: #27ae60;
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
         }
 
         /* Features Section */
@@ -349,8 +338,7 @@
             padding: 80px 50px;
             text-align: center;
             background-color: #1A5C2F;
-            position: relative;
-            overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .features h2 {
@@ -358,21 +346,8 @@
             margin-bottom: 50px;
             color: #fff;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 1s ease-in-out;
-        }
-
-        .features h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background-color: #2ecc71;
-            border-radius: 2px;
+            opacity: 0;
+            animation: fadeInDown 1s ease-in-out 0.5s forwards;
         }
 
         .feature-grid {
@@ -381,8 +356,6 @@
             gap: 40px;
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .feature-item {
@@ -393,17 +366,30 @@
             padding: 20px;
             border-radius: 15px;
             border: 1px solid rgba(46, 204, 113, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-in-out forwards;
         }
 
+        .feature-item:nth-child(1) { animation-delay: 0.2s; }
+        .feature-item:nth-child(2) { animation-delay: 0.4s; }
+        .feature-item:nth-child(3) { animation-delay: 0.6s; }
+        .feature-item:nth-child(4) { animation-delay: 0.8s; }
+        .feature-item:nth-child(5) { animation-delay: 1s; }
+        .feature-item:nth-child(6) { animation-delay: 1.2s; }
+
         .feature-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
         }
 
         .feature-item i {
             font-size: 2rem;
-            color: #fff;
+            color: #2ecc71;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover i {
+            transform: rotate(360deg);
         }
 
         .feature-item p {
@@ -411,7 +397,6 @@
             color: #fff;
             font-weight: 600;
             text-transform: uppercase;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         /* About Section */
@@ -421,10 +406,13 @@
             align-items: center;
             padding: 80px 50px;
             background-color: #1A5C2F;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .about-image {
             max-width: 45%;
+            opacity: 0;
+            animation: slideInLeft 1s ease-out 0.5s forwards;
         }
 
         .about-image img {
@@ -432,10 +420,17 @@
             height: auto;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
         }
 
         .about-content {
             max-width: 50%;
+            opacity: 0;
+            animation: slideInRight 1s ease-out 0.5s forwards;
         }
 
         .about-content h2 {
@@ -452,23 +447,12 @@
             line-height: 1.6;
         }
 
-        .about-content a {
-            color: #2ecc71;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .about-content a:hover {
-            color: #27ae60;
-        }
-
         /* Contact Section */
         .contact {
             padding: 80px 50px;
             text-align: center;
             background-color: #1A5C2F;
-            position: relative;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         .contact h2 {
@@ -476,19 +460,8 @@
             margin-bottom: 50px;
             color: #fff;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-            position: relative;
-        }
-
-        .contact h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background-color: #2ecc71;
-            border-radius: 2px;
+            opacity: 0;
+            animation: fadeInDown 1s ease-in-out 0.5s forwards;
         }
 
         .contact form {
@@ -499,18 +472,10 @@
             margin: 0 auto;
             background: rgba(42, 62, 69, 0.3);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             padding: 40px;
             border-radius: 20px;
             border: 2px solid rgba(46, 204, 113, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        @supports not (backdrop-filter: blur(15px)) {
-            .contact form {
-                background: rgba(42, 62, 69, 0.6);
-            }
+            animation: fadeInUp 1s ease-in-out 0.5s forwards;
         }
 
         .form-group {
@@ -531,7 +496,7 @@
             background-color: rgba(26, 46, 53, 0.5);
             color: #fff;
             font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: border-color 0.3s ease;
         }
 
         .contact textarea {
@@ -541,7 +506,6 @@
 
         .contact input:focus,
         .contact textarea:focus {
-            outline: none;
             border-color: #2ecc71;
             box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
         }
@@ -578,14 +542,11 @@
             font-size: 16px;
             font-weight: 600;
             text-transform: uppercase;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: 0 auto;
-            display: block;
+            transition: transform 0.3s ease;
         }
 
         .contact button:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.7);
             animation: bounce 0.5s ease;
         }
 
@@ -611,19 +572,10 @@
             gap: 10px;
         }
 
-        .footer-links p {
-            color: #2ecc71;
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
         .footer-links a {
             color: #2ecc71;
             text-decoration: none;
             font-size: 14px;
-            position: relative;
             transition: color 0.3s ease;
         }
 
@@ -631,69 +583,57 @@
             color: #27ae60;
         }
 
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #27ae60;
-            transition: width 0.3s ease;
-        }
-
-        .footer-links a:hover::after {
-            width: 100%;
-        }
-
-        .social-icons {
-            margin-bottom: 20px;
-        }
-
         .social-icons a {
             margin: 0 15px;
-            display: inline-block;
             color: #2ecc71;
             font-size: 24px;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .social-icons a:hover {
-            transform: scale(1.2);
-            color: #27ae60;
-        }
-
-        footer p {
-            font-size: 14px;
-            color: #2ecc71;
+            transform: scale(1.2) rotate(360deg);
         }
 
         /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes bounce {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
 
@@ -725,30 +665,9 @@
                 flex-direction: column;
                 align-items: center;
             }
-            nav ul li {
-                padding: 10px 20px;
-            }
             .footer-links {
                 flex-direction: column;
                 gap: 20px;
-            }
-            .contact form {
-                padding: 20px;
-            }
-            .form-group {
-                flex: 1 1 100%;
-            }
-            .features h2,
-            .contact h2 {
-                font-size: 28px;
-            }
-            .about-content h2 {
-                font-size: 24px;
-            }
-            .carousel-arrow {
-                font-size: 32px;
-                width: 60px;
-                height: 60px;
             }
         }
     </style>
@@ -759,11 +678,11 @@
         <div class="logo"><img src="{{ asset('images/CV/logo.png') }}" alt="">ResumeExpert</div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Templates</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#templates">Templates</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="{{ route('login') }}" class="login-btn">Login</a></li>
                 <li><a href="{{ route('register') }}" class="signup-btn">Signup</a></li>
             </ul>
@@ -771,7 +690,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-content">
             <h1>"Fast-Track Your Career with an ATS-Friendly Resume – Built in Minutes!"</h1>
             <button class="cta-btn">Build My Resume</button>
@@ -783,10 +702,10 @@
     </section>
 
     <!-- Templates Section -->
-    <section class="templates">
+    <section class="templates" id="templates">
         <h2>Ready to use templates that will help your resume stand out to recruiters</h2>
         <div class="carousel">
-            <span class="carousel-arrow" onclick="prevSlide()"><</span>
+            <span class="carousel-arrow" onclick="prevSlide()">&lt;</span>
             <div class="template-cards">
                 <div class="template-card">
                     <img src="{{ asset('images/CV/images (6).jpeg') }}" alt="Modern Resume">
@@ -796,6 +715,7 @@
                 <div class="template-card">
                     <img src="{{ asset('images/CV/creative-edgy-modern-black-neon-green-resume-for-programmer-editor_template.jpeg') }}" alt="Creative Resume">
                     <p>Creative Resume</p>
+                   bm
                     <button>Use Template</button>
                 </div>
                 <div class="template-card">
@@ -809,18 +729,18 @@
                     <button>Use Template</button>
                 </div>
             </div>
-            <span class="carousel-arrow" onclick="nextSlide()">></span>
+            <span class="carousel-arrow" onclick="nextSlide()">&gt;</span>
         </div>
         <div class="carousel-controls">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section class="features" id="features">
         <h2>Why Choose Our Resume Builder</h2>
         <div class="feature-grid">
             <div class="feature-item">
@@ -851,7 +771,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="about">
+    <section class="about" id="about">
         <div class="about-image">
             <img src="{{ asset('images/CV/d0217ccf-3887-40d1-a791-ef31c78abb01.png') }}" alt="About Us Image">
         </div>
@@ -860,7 +780,6 @@
             <p>At ResumeXpert, we believe building a resume should be easy and stress-free.</p>
             <p>We created this platform to help you quickly design a professional resume without the hassle of complicated formatting or design.</p>
             <p>Whether you’re starting your career or looking to make a change, ResumeXpert provides simple, modern, and customizable templates that make your resume stand out. Plus, it’s free to get started—no hidden fees, no surprises.</p>
-            <p>Our goal is to save you time and help you create a resume that gets noticed. We’re here to support you at every step of your job search.</p>
         </div>
     </section>
 
@@ -887,12 +806,12 @@
     <!-- Footer -->
     <footer>
         <div class="footer-links">
-        <div class="logo"><img src="{{ asset('images/CV/logo.png') }}" alt="">ResumeExpert</div>
+            <div class="logo"><img src="{{ asset('images/CV/logo.png') }}" alt="">ResumeExpert</div>
             <div>
                 <p>Quick Links</p>
-                <a href="#">Home</a>
-                <a href="#">Templates</a>
-                <a href="#">Features</a>
+                <a href="#hero">Home</a>
+                <a href="#templates">Templates</a>
+                <a href="#features">Features</a>
             </div>
             <div>
                 <p>Contact Info</p>
@@ -913,78 +832,40 @@
         <p>© 2025 ResumeXpert. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for Modal and Carousel -->
+    <!-- JavaScript for Carousel -->
     <script>
-        // Modal Functions
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-
-        // Carousel Functions
         let currentSlide = 0;
         const slides = document.querySelectorAll('.template-card');
         const dots = document.querySelectorAll('.dot');
         const totalSlides = slides.length;
-        let autoSlideInterval;
 
         function updateCarousel() {
             const slideWidth = slides[0].offsetWidth + 30;
-            document.querySelector('.template-cards').style.transform = translateX(-${currentSlide * slideWidth}px);
+            document.querySelector('.template-cards').style.transform = `translateX(-${currentSlide * slideWidth}px)`;
             dots.forEach(dot => dot.classList.remove('active'));
             dots[currentSlide].classList.add('active');
         }
 
         function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-            } else {
-                currentSlide = totalSlides - 1;
-            }
+            currentSlide = (currentSlide > 0) ? currentSlide - 1 : totalSlides - 1;
             updateCarousel();
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-            } else {
-                currentSlide = 0;
-            }
+            currentSlide = (currentSlide < totalSlides - 1) ? currentSlide + 1 : 0;
             updateCarousel();
         }
 
-        // Auto-slide functionality
-        function startAutoSlide() {
-            autoSlideInterval = setInterval(nextSlide, 5000);
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
         }
 
-        function stopAutoSlide() {
-            clearInterval(autoSlideInterval);
-        }
+        // Auto-slide
+        set-interval(nextSlide, 5000);
 
-        // Start auto-slide on page load
-        startAutoSlide();
-
-        // Pause auto-slide on hover
-        document.querySelector('.carousel').addEventListener('mouseenter', stopAutoSlide);
-        document.querySelector('.carousel').addEventListener('mouseleave', startAutoSlide);
-
-        // Update carousel on dot click
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentSlide = index;
-                updateCarousel();
-            });
-        });
+        // Initial update
+        updateCarousel();
     </script>
 </body>
 </html>
