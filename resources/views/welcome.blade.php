@@ -887,6 +887,7 @@
     <!-- Footer -->
     <footer>
         <div class="footer-links">
+        <div class="logo"><img src="{{ asset('images/CV/logo.png') }}" alt="">ResumeExpert</div>
             <div>
                 <p>Quick Links</p>
                 <a href="#">Home</a>
