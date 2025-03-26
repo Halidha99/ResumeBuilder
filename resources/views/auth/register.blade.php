@@ -420,6 +420,7 @@
                             placeholder="Confirm your password">
                         @error('password_confirmation') <span class="message">{{ $message }}</span> @enderror
                     </div>
+                    <br>
 
                     <button type="submit" class="primary-button">Register</button>
 
