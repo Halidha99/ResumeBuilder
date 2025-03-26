@@ -205,10 +205,10 @@
             position: relative;
             transition: color 0.3s ease;
             font-size:12px;
-            
+
         }
 
-       
+
 
         .login-link::after {
             content: '';
@@ -372,11 +372,11 @@
         .padding{
             padding-right:70px;
         }
-        
+
     </style>
 
 
-    
+
 
         <div class="main-container">
             <!-- Left Section: Text + Floating Resume -->
@@ -386,12 +386,12 @@
                 <p>Land Your Dream Job</p>
                 <img src="{{ asset('images/CV/1.png') }}" alt="Resume">
             </div>
-    
+
             <!-- Right Section: Register Form -->
             <div class="register-container">
                 <div class="register-title">Login</div>
-    
-                <form method="POST" action="{{ route('register') }}" class="space-y-4">
+
+                <form method="POST" action="{{ route('login') }}" class="space-y-4">
                     @csrf
                     <div>
                         <span class="input-type-label">Email</span>
@@ -406,21 +406,21 @@
                                placeholder="Enter your password">
                         @error('password') <span class="message">{{ $message }}</span> @enderror
                     </div>
-                    
+
                     <!-- Remember Me -->
                     <div class="block mt-4 flex items-center justify-between">
                         <label for="remember_me" class="inline-flex items-center">
                             <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
                             <span class="login-link padding">{{ __('Remember me') }}</span>
                         </label>
-                    
+
                         @if (Route::has('password.request'))
                             <a class="underline login-link " href="{{ route('password.request') }}">
                                 {{ __('Forgot your password?') }}
                             </a>
                         @endif
                     </div>
-                    
+
                     <br>
                     <div class="flex items-center justify-end mt-4">
                         <button type="submit" class="primary-button">Login</button>
@@ -428,14 +428,14 @@
                         <div class="text-center mt-3">
                             <a class="text-sm login-link" href="{{ route('register') }}">Don’t have an Account?   Register Now</a>
                         </div>
-        
+
                         <div class="or-divider">or</div>
-        
+
                         <div class="social-login">
                         <a href="#" class="social-button"><i class="fab fa-google"></i></a>
                         <a href="#" class="social-button"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-button"><i class="fab fa-instagram"></i></a>
-        
+
                         </div>
                             </form>
                         </div>

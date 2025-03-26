@@ -1,18 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <x-guest-layout>
+
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>{{ config('app.name', 'Laravel') }} - Register</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+            rel="stylesheet">
     </head>
 
     <style>
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Background Image Styling */
         body {
             background-image: url('{{ asset('images/CV/back.png') }}');
             background-size: cover;
@@ -24,7 +30,6 @@
             overflow: hidden;
         }
 
-        /* Background Overlay with Gradient */
         body::before {
             content: "";
             position: fixed;
@@ -36,7 +41,6 @@
             z-index: -1;
         }
 
-        /* Main Container */
         .main-container {
             display: flex;
             flex-direction: row;
@@ -48,7 +52,6 @@
             margin: 0 auto;
         }
 
-        /* Left Section */
         .left-section {
             flex: 1;
             display: flex;
@@ -103,7 +106,6 @@
             transform: rotate(-12deg) scale(1.05);
         }
 
-        /* Right Section (Form) */
         .register-container {
             flex: 1;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(5, 44, 19, 0.3));
@@ -117,7 +119,6 @@
             animation: fadeInRight 1s ease-out;
         }
 
-        /* White Inner Border */
         .register-container::before {
             content: "";
             position: absolute;
@@ -130,7 +131,6 @@
             pointer-events: none;
         }
 
-        /* Title Styling */
         .register-title {
             text-align: center;
             color: white;
@@ -141,7 +141,6 @@
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Input Styling */
         .transparent-input {
             background: rgba(255, 255, 255, 0.15);
             padding: 0.85rem;
@@ -164,7 +163,6 @@
             outline: none;
         }
 
-        /* Input Label */
         .input-type-label {
             color: #0CFE0C;
             font-size: 0.9rem;
@@ -175,7 +173,6 @@
             letter-spacing: 1px;
         }
 
-        /* Button Styling */
         .primary-button {
             background: linear-gradient(90deg, #0E3B1F, #26A155);
             color: white;
@@ -196,7 +193,6 @@
             box-shadow: 0 6px 20px rgba(38, 161, 85, 0.5);
         }
 
-        /* Login Link */
         .login-link {
             color: white;
             text-decoration: none;
@@ -225,6 +221,7 @@
             transform: scaleX(1);
             transform-origin: bottom left;
         }
+
         .or-divider {
             display: flex;
             align-items: center;
@@ -248,8 +245,6 @@
             margin-left: .5em;
         }
 
-
-        /* Social Login */
         .social-login {
             display: flex;
             justify-content: center;
@@ -277,12 +272,12 @@
             transform: translateY(-2px);
         }
 
-        /* Animations */
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
                 transform: translateX(-50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -294,6 +289,7 @@
                 opacity: 0;
                 transform: translateX(50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -304,15 +300,16 @@
             0% {
                 transform: rotate(-12deg) translateY(0);
             }
+
             50% {
                 transform: rotate(-12deg) translateY(-10px);
             }
+
             100% {
                 transform: rotate(-12deg) translateY(0);
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
@@ -364,72 +361,83 @@
             }
         }
 
-        .message{
-            color:red;
-            font-size:14px;
+        .message {
+            color: red;
+            font-size: 14px;
+            margin-top: 0.25rem;
+            display: block;
         }
     </style>
 
-    <div class="main-container">
-        <!-- Left Section: Text + Floating Resume -->
-        <div class="left-section">
-            <h1>Join <span>ResumeXpert</span> Today</h1>
-            <p>Build Your Perfect Resume &</p>
-            <p>Land Your Dream Job</p>
-            <img src="{{ asset('images/CV/1.png') }}" alt="Resume">
+    <body>
+        <div class="main-container">
+            <div class="left-section">
+                <h1>Join <span>ResumeXpert</span> Today</h1>
+                <p>Build Your Perfect Resume &</p>
+                <p>Land Your Dream Job</p>
+                <img src="{{ asset('images/CV/1.png') }}" alt="Resume">
+            </div>
+
+            <div class="register-container">
+                <div class="register-title">Register</div>
+
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+
+                    <div>
+                        <span class="input-type-label">Name</span>
+                        <input id="name" class="transparent-input" type="text" name="name" value="{{ old('name') }}"
+                            required autofocus autocomplete="name" placeholder="Enter your username">
+                        @error('name') <span class="message">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <span class="input-type-label">Email</span>
+                        <input id="email" class="transparent-input" type="email" name="email" value="{{ old('email') }}"
+                            required autocomplete="email" placeholder="Enter your Email">
+                        @error('email') <span class="message">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <span class="input-type-label">Contact Number</span>
+                        <input id="contact_number" class="transparent-input" type="tel" name="contact_number"
+                            value="{{ old('contact_number') }}" autocomplete="tel"
+                            placeholder="Enter your contact number">
+                        @error('contact_number') <span class="message">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <span class="input-type-label">Password</span>
+                        <input id="password" class="transparent-input" type="password" name="password" required
+                            autocomplete="new-password" placeholder="Enter your password">
+                        @error('password') <span class="message">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <span class="input-type-label">Confirm Password</span>
+                        <input id="password_confirmation" class="transparent-input" type="password"
+                            name="password_confirmation" required autocomplete="new-password"
+                            placeholder="Confirm your password">
+                        @error('password_confirmation') <span class="message">{{ $message }}</span> @enderror
+                    </div>
+
+                    <button type="submit" class="primary-button">Register</button>
+
+                    <div class="text-center mt-3">
+                        <a class="text-sm login-link" href="{{ route('login') }}">Already registered? Login</a>
+                    </div>
+
+                    <div class="or-divider">or</div>
+
+                    <div class="social-login">
+                        <a href="#" class="social-button"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-button"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-button"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <!-- Right Section: Register Form -->
-        <div class="register-container">
-            <div class="register-title">Register</div>
-
-            <form method="POST" action="{{ route('register') }}" class="space-y-4">
-                @csrf
-
-                <div>
-                    <span class="input-type-label">Name</span>
-                    <input id="name" class="transparent-input" type="text" name="name" value="{{ old('name') }}"
-                           required autofocus placeholder="Enter your username">
-                    @error('name') <span class="message">{{ $message }}</span> @enderror
-                </div>
-
-                <div>
-                    <span class="input-type-label">Email</span>
-                    <input id="email" class="transparent-input" type="email" name="email" value="{{ old('email') }}"
-                           required placeholder="Enter your Email">
-                    @error('email') <span class="message">{{ $message }}</span> @enderror
-                </div>
-
-                <div>
-                    <span class="input-type-label">Contact Number</span>
-                    <input id="contact_number" class="transparent-input" type="tel" name="contact_number"
-                           value="{{ old('contact_number') }}" placeholder="Enter your contact number">
-                    @error('contact_number') <span class="message">{{ $message }}</span> @enderror
-                </div>
-
-                <div>
-                    <span class="input-type-label">Password</span>
-                    <input id="password" class="transparent-input" type="password" name="password" required
-                           placeholder="Enter your password">
-                    @error('password') <span class="message">{{ $message }}</span> @enderror
-                </div>
-                <br>
-
-                <button type="submit" class="primary-button">Register</button>
-
-                <div class="text-center mt-3">
-                    <a class="text-sm login-link" href="{{ route('login') }}">Already registered? Login</a>
-                </div>
-
-                <div class="or-divider">or</div>
-
-                <div class="social-login">
-                <a href="#" class="social-button"><i class="fab fa-google"></i></a>
-                <a href="#" class="social-button"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-button"><i class="fab fa-instagram"></i></a>
-
-                </div>
-            </form>
-        </div>
-    </div>
+    </body>
 </x-guest-layout>
+
+</html>
