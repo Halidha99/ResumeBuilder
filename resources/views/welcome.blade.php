@@ -693,7 +693,7 @@
     <section class="hero" id="hero">
         <div class="hero-content">
             <h1>"Fast-Track Your Career with an ATS-Friendly Resume – Built in Minutes!"</h1>
-            <button class="cta-btn">Build My Resume</button>
+            <a href="{{ route('register') }}" class="cta-btn">Build My Resume</a>
         </div>
         <div class="hero-image">
             <img src="{{ asset('images/CV/images (5).jpeg') }}" alt="Resume Mockup 1">

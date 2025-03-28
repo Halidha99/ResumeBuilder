@@ -278,7 +278,7 @@
         <p>Including your contacts in your resume is crucial so potential employers can easily get in touch with you.
         </p>
 
-        <form method="POST" action="{{ route('cv.store.step-one') }}" class="form-container">
+        <form method="POST" action="{{ route('contact') }}" class="form-container">
             @csrf
             <div class="form-group">
                 <div>

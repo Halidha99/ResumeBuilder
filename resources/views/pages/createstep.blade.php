@@ -25,75 +25,120 @@
         flex-direction: column;
     }
 
-    /* Navbar */
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background-color: #0E3B1F;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background-color: #042C16;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideInDown 0.8s ease-out;
+        }
 
-    .navbar .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #0CFE0C;
-    }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2ecc71;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .navbar .nav-links {
-        display: flex;
-        gap: 2rem;
-    }
+        .logo img {
+            width: 70px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #2ecc71;
+            box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+            transition: transform 0.3s ease;
+        }
 
-    .navbar .nav-links a {
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
-    }
+        .logo img:hover {
+            transform: scale(1.1) rotate(360deg);
+        }
 
-    .navbar .nav-links a:hover {
-        color: #0CFE0C;
-    }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
 
-    .navbar .auth-links {
-        display: flex;
-        gap: 1rem;
-    }
+        nav ul li {
+            position: relative;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
 
-    .navbar .auth-links form {
-        display: inline;
-    }
+        nav ul li:hover {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-radius: 25px;
+        }
 
-    .navbar .auth-links button {
-        background: none;
-        border: none;
-        color: white;
-        font-weight: 500;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
 
-    .navbar .auth-links button:hover {
-        color: #0CFE0C;
-    }
+        nav ul li a:not(.logout-btn):hover {
+            color: #2ecc71;
+            transform: scale(1.05);
+        }
 
-    .navbar .auth-links .signup-btn {
-        background: #0CFE0C;
-        color: #0E3B1F;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: background 0.3s ease;
-    }
+        nav ul li a:not(.logout-btn)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #2ecc71;
+            transition: width 0.3s ease;
+        }
 
-    .navbar .auth-links .signup-btn:hover {
-        background: #26A155;
-        color: white;
-    }
+        nav ul li a:not(.logout-btn):hover::after {
+            width: 100%;
+        }
 
+        nav ul li a.logout-btn {
+            background: linear-gradient(#0E3B1F, #26A155);
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav ul li a.logout-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 12px rgba(46, 204, 113, 0.5);
+            animation: pulse 0.5s infinite;
+        }
+        .user-name {
+            color: #2ecc71;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-name img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid greenyellow;
+        }
     /* Main Content */
     .main-content {
         flex: 1;
@@ -195,29 +240,33 @@
 </style>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">ResumeXpert</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="{{ route('dashboard') }}">Template</a>
-            <a href="#">Features</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </div>
-        <div class="auth-links">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-            <a href="{{ route('register') }}" class="signup-btn">Sign Up</a>
-        </div>
+    <!-- Header -->
+    <header>
+        <div class="logo"><img src="{{ asset('images/CV/logo.png') }}" alt="">ResumeExpert</div>
+        <nav>
+            <ul>
+               
+            @auth
+                    <li><span class="user-name"><img src="{{asset('images/CV/user.png')}}" alt=""> Welcome  {{ Auth::user()->name }}</span></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                            @csrf
+                            <a href="#" class="logout-btn" onclick="this.closest('form').submit(); return false;">Logout</a>
+                        </form>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}" class="login-btn">Login</a></li>
+                    @endauth
+            </ul>
+        </nav>
+    </header>
+
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
         <h1>How will you make your resume?</h1>
-        <a href="#" class="option-card">
+        <a href="{{ route('contact') }}" class="option-card">
             <i class="fas fa-file-alt"></i>
             <div class="option-info">
                 <h3>Start from scratch</h3>

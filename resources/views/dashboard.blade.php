@@ -805,17 +805,17 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>"Fast-Track Your Career with an ATS-Friendly Resume – Built in Minutes!"</h1>
-            <button class="cta-btn">Build My Resume</button>
-        </div>
-        <div class="hero-image">
-            <img src="{{ asset('images/CV/images (5).jpeg') }}" alt="Resume Mockup 1">
-            <img src="{{ asset('images/CV/creative-edgy-modern-black-neon-green-resume-for-programmer-editor_template.jpeg') }}"
-                alt="Resume Mockup 2">
-        </div>
-    </section>
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <h1>Fast-Track Your Career with an ATS-Friendly Resume – Built in Minutes!</h1>
+        <a href="{{ route('template') }}" class="cta-btn">Build My Resume</a>
+    </div>
+    <div class="hero-image">
+        <img src="{{ asset('images/CV/images-5.jpeg') }}" alt="Resume Mockup 1">
+        <img src="{{ asset('images/CV/creative-edgy-modern-black-neon-green-resume-for-programmer-editor_template.jpeg') }}"
+            alt="Resume Mockup 2">
+    </div>
+</section>
 
 <!-- Templates Section -->
 <section class="templates" id="templates">
