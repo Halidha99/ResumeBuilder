@@ -246,7 +246,7 @@ header {
     }
 
    /* Footer */
-  
+
     .footer {
         background: #0E3B1F;
         padding: 1rem;
@@ -304,7 +304,7 @@ header {
         <div class="logo"><img src="{{ asset('images/CV/logo.png') }}" alt="">ResumeExpert</div>
         <nav>
             <ul>
-               
+
             @auth
                     <li><span class="user-name"><img src="{{asset('images/CV/user.png')}}" alt=""> Welcome  {{ Auth::user()->name }}</span></li>
                     <li>
@@ -330,25 +330,25 @@ header {
     <!-- Templates Section -->
     <div class="templates-section">
         <div class="template-card">
-            <img src="{{ asset('images/CV/template1.png') }}" alt="Danielle Brasseur Template">
+            <img src="{{ asset('images/CV/images (6).jpeg') }}" alt="Danielle Brasseur Template">
             <div class="template-info">
-                <h3>Danielle Brasseur</h3>
+
                 <p>Recommended</p>
             </div>
             <div class="template-actions">
                 <a href="{{ route('createstep') }}" class="button">choose</a>
-                
+
             </div>
         </div>
         <div class="template-card">
-            <img src="{{ asset('images/CV/template2.png') }}" alt="Felicity Jones Template">
+            <img src="{{ asset('images/CV/images (7).jpeg') }}" alt="Felicity Jones Template">
             <div class="template-info">
-                <h3>Felicity Jones</h3>
+
                 <p>Expert Customer Service</p>
             </div>
             <div class="template-actions">
                 <a href="{{ route('createstep') }}" class="button">choose</a>
-               
+
             </div>
         </div>
     </div>
@@ -363,25 +363,25 @@ header {
     <!-- Templates Section (Second Set) -->
     <div class="templates-section">
         <div class="template-card">
-            <img src="{{ asset('images/CV/template1.png') }}" alt="Danielle Brasseur Template">
+            <img src="{{ asset('images/CV/images (8).jpeg') }}" alt="Danielle Brasseur Template">
             <div class="template-info">
-                <h3>Danielle Brasseur</h3>
+
                 <p>All</p>
             </div>
             <div class="template-actions">
                 <a href="{{ route('createstep') }}" class="button">choose</a>
-              
+
             </div>
         </div>
         <div class="template-card">
-            <img src="{{ asset('images/CV/template2.png') }}" alt="Felicity Jones Template">
+            <img src="{{ asset('images/CV/images (5).jpeg') }}" alt="Felicity Jones Template">
             <div class="template-info">
-                <h3>Felicity Jones</h3>
+
                 <p>Expert Customer Service</p>
             </div>
             <div class="template-actions">
                 <a href="{{ route('createstep') }}" class="button">choose</a>
-              
+
             </div>
         </div>
     </div>
