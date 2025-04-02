@@ -811,7 +811,7 @@
         <a href="{{ route('template') }}" class="cta-btn">Build My Resume</a>
     </div>
     <div class="hero-image">
-        <img src="{{ asset('images/CV/images-5.jpeg') }}" alt="Resume Mockup 1">
+        <img src="{{ asset('images/CV/images (5).jpeg') }}" alt="Resume Mockup 1">
         <img src="{{ asset('images/CV/creative-edgy-modern-black-neon-green-resume-for-programmer-editor_template.jpeg') }}"
             alt="Resume Mockup 2">
     </div>

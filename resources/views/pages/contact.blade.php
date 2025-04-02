@@ -126,23 +126,35 @@
     }
 
     .additional-section {
-        margin-top: 2rem;
-    }
+            margin-bottom: 1.5rem;
+        }
 
-    .additional-section h3 {
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
+        .additional-section .toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
 
-    .additional-section h3 i {
-        font-size: 1.2rem;
-        color: #0CFE0C;
-    }
+        .additional-section .toggle i {
+            color: #2ECC71;
+            font-size: 12px;
+        }
 
+        .additional-section .toggle span {
+            font-size: 12px;
+            font-weight: 400;
+            color: #D3D3D3;
+        }
+
+        .additional-fields {
+            display: none;
+        }
+
+        .additional-fields.active {
+            display: block;
+        }
     /* Navigation Buttons */
     .nav-buttons {
         display: flex;
@@ -154,7 +166,7 @@
 
     .nav-buttons a,
     .nav-buttons button {
-        padding: 0.75rem 2rem;
+        padding: 0.25rem 2rem;
         border: none;
         border-radius: 5px;
         font-weight: 500;
@@ -310,42 +322,64 @@
             </div>
 
             <div class="additional-section">
-                <h3><i class="fas fa-plus-circle"></i> Additional Section</h3>
-                <div class="form-group">
-                    <div>
-                        <label for="git_link">GIT Link</label>
-                        <input type="url" id="git_link" name="git_link">
+                <div class="toggle" onclick="toggleAdditionalFields()">
+                    <h3><i class="fas fa-chevron-right"></i> Additional Section</h3>
+                </div>
+                <div class="additional-fields" id="additionalFields">
+                    <div class="form-group double">
+                        <div class="input-field">
+                            <label for="git_link">Git Link</label>
+                            <input type="url" id="git_link" name="git_link" value="{{ old('git_link') }}">
+                            @error('git_link')
+                                <span class="error" style="color: #ff6b6b; font-size: 0.8rem;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="input-field">
+                            <label for="linkedin_link">LinkedIn Link</label>
+                            <input type="url" id="linkedin_link" name="linkedin_link" value="{{ old('linkedin_link') }}">
+                            @error('linkedin_link')
+                                <span class="error" style="color: #ff6b6b; font-size: 0.8rem;">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
-                    <div>
-                        <label for="linkedin_link">LinkedIn Link</label>
-                        <input type="url" id="linkedin_link" name="linkedin_link">
+                    <div class="form-group double">
+                        <div class="input-field">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" value="{{ old('country') }}">
+                            @error('country')
+                                <span class="error" style="color: #ff6b6b; font-size: 0.8rem;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="input-field">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" value="{{ old('city') }}">
+                            @error('city')
+                                <span class="error" style="color: #ff6b6b; font-size: 0.8rem;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group double">
+                        <div class="input-field">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" value="{{ old('address') }}">
+                            @error('address')
+                                <span class="error" style="color: #ff6b6b; font-size: 0.8rem;">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="input-field">
+                            <label for="post_code">Post Code</label>
+                            <input type="text" id="post_code" name="post_code" value="{{ old('post_code') }}">
+                            @error('post_code')
+                                <span class="error" style="color: #ff6b6b; font-size: 0.8rem;">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div>
-                        <label for="country">Country</label>
-                        <input type="text" id="country" name="country">
-                    </div>
-                    <div>
-                        <label for="city">City</label>
-                        <input type="text" id="city" name="city">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div>
-                        <label for="address">Address</label>
-                        <input type="text" id="address" name="address">
-                    </div>
-                    <div>
-                        <label for="post_code">Post Code</label>
-                        <input type="text" id="post_code" name="post_code">
-                    </div>
-                </div>
-            </div>
+            </div>
 
             <!-- Navigation Buttons -->
             <div class="nav-buttons">
-                <a href="{{ route('cv.create.step-zero') }}" class="back-btn">
+                <a href="{{ route('createstep') }}" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Go Back
                 </a>
                 <button type="submit" class="next-btn">Next</button>
@@ -357,6 +391,14 @@
     <footer class="footer">
         <p>© 2025 ResumeXpert. All rights reserved.</p>
     </footer>
+
+
+    <script>
+        function toggleAdditionalFields() {
+            const additionalFields = document.getElementById('additionalFields');
+            additionalFields.classList.toggle('active');
+        }
+       </script>
 </body>
 
 </html>
